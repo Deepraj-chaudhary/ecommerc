@@ -1,0 +1,81 @@
+@import '../../../_css/common';
+
+.form {
+  margin-bottom: var(--base);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--base) / 2);
+  align-items: flex-start;
+  width: 100%;
+
+  @include mid-break {
+    width: 90%;
+  }
+}
+
+.changePassword {
+  all: unset;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.submit {
+  margin-top: calc(var(--base) / 2);
+}
+
+.form {
+  
+
+  .message {
+    margin-bottom: 1rem;
+  }
+
+  .selectWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    label {
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    select {
+      padding: 1rem;
+      font-size: 0.8rem;
+      border: 1px solid #807272;
+      border-radius: 9px;
+      transition: border-color 0.2s;
+      width : 100%;
+      @include mid-break {
+        width: 90%;
+      }
+      &.error {
+        border-color: red;
+      }
+    }
+
+    .errorMessage {
+      color: red;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .changePassword {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .submit {
+    align-self: flex-end;
+  }
+}

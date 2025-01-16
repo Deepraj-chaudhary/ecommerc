@@ -1,0 +1,149 @@
+@use '../../_css/common.scss' as *;
+
+.productHero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+
+  @include small-break {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mediaWrapper {
+  position: relative;
+  background-color: var(--color-dark-50);
+  width: 100%;
+  margin: 0 auto; // center the wrapper
+  padding-bottom: 150%; // for a 1080:720 ratio
+  margin: 0 auto;
+  height: 0px;
+  @include small-break {
+    width: 100%;
+    height: calc(width * 1.5);
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.imageVisible {
+  opacity: 1;
+}
+
+.imageHidden {
+  opacity: 0;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.categoryWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.category {
+  font-size: 16px;
+}
+
+.stock {
+  color: var(--color-green-500);
+}
+
+.separator {
+  color: var(--color-gray-500);
+  padding: 0 10px;
+}
+
+.description {
+  padding: 30px 0;
+}
+
+.sizeOptions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.sizeOption {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  font-weight: 500;
+
+  @include small-break {
+    margin-bottom: 10px;
+  }
+}
+
+.sizeOption.selected {
+  background-color: var(--color-dark-500);
+  color: white;
+  border-color: var(--color-dark-500); 
+}
+
+.sizeOption.unselectable {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.outOfStockMessage, .selectSizeMessage {
+  color: var(--theme-warning-700);
+  font-size: 18px;
+  margin-top: 6px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid var(--theme-warning-700);
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.dotContainer {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.activeDot {
+  background-color: #333;
+}
+
+.sizeChartLink {
+  color: #0070f3;
+  text-decoration: underline;
+  margin-left: 10px;
+}
+
+.loginMessage {
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
