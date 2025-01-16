@@ -1443,8 +1443,6 @@ type Product {
   paywall: [Product_Paywall!]
   categories: [Category!]
   relatedProducts(draft: Boolean): [Product!]
-  price: Float
-  discount: Float
   moreSizes: [Product_moreSizes!]
   media(where: Product_Media_where): Media
   slug: String
@@ -4054,8 +4052,6 @@ input Product_where {
   enablePaywall: Product_enablePaywall_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
-  price: Product_price_operator
-  discount: Product_discount_operator
   moreSizes: Product_moreSizes_operator
   media: Product_media_operator
   slug: Product_slug_operator
@@ -4132,25 +4128,6 @@ input Product_relatedProducts_operator {
   in: [JSON]
   not_in: [JSON]
   all: [JSON]
-  exists: Boolean
-}
-
-input Product_price_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-}
-
-input Product_discount_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
   exists: Boolean
 }
 
@@ -4273,8 +4250,6 @@ input Product_where_and {
   enablePaywall: Product_enablePaywall_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
-  price: Product_price_operator
-  discount: Product_discount_operator
   moreSizes: Product_moreSizes_operator
   media: Product_media_operator
   slug: Product_slug_operator
@@ -4298,8 +4273,6 @@ input Product_where_or {
   enablePaywall: Product_enablePaywall_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
-  price: Product_price_operator
-  discount: Product_discount_operator
   moreSizes: Product_moreSizes_operator
   media: Product_media_operator
   slug: Product_slug_operator
@@ -4338,8 +4311,6 @@ type ProductsDocAccessFields {
   paywall: ProductsDocAccessFields_paywall
   categories: ProductsDocAccessFields_categories
   relatedProducts: ProductsDocAccessFields_relatedProducts
-  price: ProductsDocAccessFields_price
-  discount: ProductsDocAccessFields_discount
   moreSizes: ProductsDocAccessFields_moreSizes
   media: ProductsDocAccessFields_media
   slug: ProductsDocAccessFields_slug
@@ -4554,52 +4525,6 @@ type ProductsDocAccessFields_relatedProducts_Update {
 }
 
 type ProductsDocAccessFields_relatedProducts_Delete {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_price {
-  create: ProductsDocAccessFields_price_Create
-  read: ProductsDocAccessFields_price_Read
-  update: ProductsDocAccessFields_price_Update
-  delete: ProductsDocAccessFields_price_Delete
-}
-
-type ProductsDocAccessFields_price_Create {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_price_Read {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_price_Update {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_price_Delete {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_discount {
-  create: ProductsDocAccessFields_discount_Create
-  read: ProductsDocAccessFields_discount_Read
-  update: ProductsDocAccessFields_discount_Update
-  delete: ProductsDocAccessFields_discount_Delete
-}
-
-type ProductsDocAccessFields_discount_Create {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_discount_Read {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_discount_Update {
-  permission: Boolean!
-}
-
-type ProductsDocAccessFields_discount_Delete {
   permission: Boolean!
 }
 
@@ -4907,8 +4832,6 @@ type ProductVersion_Version {
   paywall: [ProductVersion_Version_Paywall!]
   categories: [Category!]
   relatedProducts(draft: Boolean): [Product!]
-  price: Float
-  discount: Float
   moreSizes: [ProductVersion_Version_moreSizes!]
   media(where: ProductVersion_Version_Media_where): Media
   slug: String
@@ -5340,8 +5263,6 @@ input versionsProduct_where {
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
-  version__price: versionsProduct_version__price_operator
-  version__discount: versionsProduct_version__discount_operator
   version__moreSizes: versionsProduct_version__moreSizes_operator
   version__media: versionsProduct_version__media_operator
   version__slug: versionsProduct_version__slug_operator
@@ -5430,25 +5351,6 @@ input versionsProduct_version__relatedProducts_operator {
   in: [JSON]
   not_in: [JSON]
   all: [JSON]
-  exists: Boolean
-}
-
-input versionsProduct_version__price_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-}
-
-input versionsProduct_version__discount_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
   exists: Boolean
 }
 
@@ -5600,8 +5502,6 @@ input versionsProduct_where_and {
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
-  version__price: versionsProduct_version__price_operator
-  version__discount: versionsProduct_version__discount_operator
   version__moreSizes: versionsProduct_version__moreSizes_operator
   version__media: versionsProduct_version__media_operator
   version__slug: versionsProduct_version__slug_operator
@@ -5629,8 +5529,6 @@ input versionsProduct_where_or {
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
-  version__price: versionsProduct_version__price_operator
-  version__discount: versionsProduct_version__discount_operator
   version__moreSizes: versionsProduct_version__moreSizes_operator
   version__media: versionsProduct_version__media_operator
   version__slug: versionsProduct_version__slug_operator
@@ -10695,8 +10593,6 @@ type ProductsFields {
   paywall: ProductsFields_paywall
   categories: ProductsFields_categories
   relatedProducts: ProductsFields_relatedProducts
-  price: ProductsFields_price
-  discount: ProductsFields_discount
   moreSizes: ProductsFields_moreSizes
   media: ProductsFields_media
   slug: ProductsFields_slug
@@ -10911,52 +10807,6 @@ type ProductsFields_relatedProducts_Update {
 }
 
 type ProductsFields_relatedProducts_Delete {
-  permission: Boolean!
-}
-
-type ProductsFields_price {
-  create: ProductsFields_price_Create
-  read: ProductsFields_price_Read
-  update: ProductsFields_price_Update
-  delete: ProductsFields_price_Delete
-}
-
-type ProductsFields_price_Create {
-  permission: Boolean!
-}
-
-type ProductsFields_price_Read {
-  permission: Boolean!
-}
-
-type ProductsFields_price_Update {
-  permission: Boolean!
-}
-
-type ProductsFields_price_Delete {
-  permission: Boolean!
-}
-
-type ProductsFields_discount {
-  create: ProductsFields_discount_Create
-  read: ProductsFields_discount_Read
-  update: ProductsFields_discount_Update
-  delete: ProductsFields_discount_Delete
-}
-
-type ProductsFields_discount_Create {
-  permission: Boolean!
-}
-
-type ProductsFields_discount_Read {
-  permission: Boolean!
-}
-
-type ProductsFields_discount_Update {
-  permission: Boolean!
-}
-
-type ProductsFields_discount_Delete {
   permission: Boolean!
 }
 
@@ -13995,8 +13845,6 @@ input mutationProductInput {
   paywall: JSON
   categories: [String]
   relatedProducts: [String]
-  price: Float!
-  discount: Float
   moreSizes: [Product_moreSizes_MutationInput]
   media: String
   slug: String
@@ -14035,8 +13883,6 @@ input mutationProductUpdateInput {
   paywall: JSON
   categories: [String]
   relatedProducts: [String]
-  price: Float
-  discount: Float
   moreSizes: [ProductUpdate_moreSizes_MutationInput]
   media: String
   slug: String

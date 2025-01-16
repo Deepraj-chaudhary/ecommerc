@@ -9,30 +9,29 @@ import { Price } from '../PriceDiscount'
 
 import classes from './index.module.scss'
 
-// Remove the priceFromJSON function
-// const priceFromJSON = (priceJSON): string => {
-//   let price = ''
+const priceFromJSON = (priceJSON): string => {
+  let price = ''
 
-//   if (priceJSON) {
-//     try {
-//       const parsed = JSON.parse(priceJSON)?.data[0]
-//       const priceValue = parsed.unit_amount
-//       const priceType = parsed.type
-//       price = `${parsed.currency === 'inr' ? '₹' : ''}${(priceValue / 100).toFixed(2)}`
-//       if (priceType === 'recurring') {
-//         price += `/${
-//           parsed.recurring.interval_count > 1
-//             ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
-//             : parsed.recurring.interval
-//         }`
-//       }
-//     } catch (e) {
-//       console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
-//     }
-//   }
+  if (priceJSON) {
+    try {
+      const parsed = JSON.parse(priceJSON)?.data[0]
+      const priceValue = parsed.unit_amount
+      const priceType = parsed.type
+      price = `${parsed.currency === 'inr' ? '₹' : ''}${(priceValue / 100).toFixed(2)}`
+      if (priceType === 'recurring') {
+        price += `/${
+          parsed.recurring.interval_count > 1
+            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
+            : parsed.recurring.interval
+        }`
+      }
+    } catch (e) {
+      console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
+    }
+  }
 
-//   return price
-// }
+  return price
+}
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -47,7 +46,7 @@ export const Card: React.FC<{
     showCategories,
     title: titleFromProps,
     doc,
-    doc: { slug, title, categories, meta } = {}, // Remove priceJSON from here
+    doc: { slug, title, categories, meta, priceJSON } = {},
     className,
   } = props
 
@@ -58,15 +57,14 @@ export const Card: React.FC<{
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/products/${slug}`
 
-  // Remove the useState and useEffect related to priceFromJSON
-  // const [
-  //   price, // eslint-disable-line no-unused-vars
-  //   setPrice,
-  // ] = useState(() => priceFromJSON(priceJSON))
+  const [
+    price, // eslint-disable-line no-unused-vars
+    setPrice,
+  ] = useState(() => priceFromJSON(priceJSON))
 
-  // useEffect(() => {
-  //   setPrice(priceFromJSON(priceJSON))
-  // }, [priceJSON])
+  useEffect(() => {
+    setPrice(priceFromJSON(priceJSON))
+  }, [priceJSON])
 
   return (
     <Link href={href} className={[classes.card, className].filter(Boolean).join(' ')}>

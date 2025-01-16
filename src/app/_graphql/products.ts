@@ -28,8 +28,6 @@ export const PRODUCT = `
           ${ARCHIVE_BLOCK}
         }
         priceJSON
-        price
-        discount
         enablePaywall
         moreSizes 
         ${MEDIA}

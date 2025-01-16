@@ -7,7 +7,7 @@ import type { Order } from '../../../../../payload/payload-types'
 import CopyToClipboardIcon from '../../../../_components/CopyToClipboardIcon'
 import { HR } from '../../../../_components/HR'
 import { Media } from '../../../../_components/Media'
-import { Price } from '../../../../_components/PriceDiscount'
+import { Price } from '../../../../_components/Price'
 import { formatDateTime } from '../../../../_utilities/formatDateTime'
 import { getMeUser } from '../../../../_utilities/getMeUser'
 import { mergeOpenGraph } from '../../../../_utilities/mergeOpenGraph'
@@ -130,7 +130,7 @@ export default async function Order({ params: { id } }) {
                     )}
                   </Link>
                   <div className={classes.rowContent}>
-                    {/* {!stripeProductID && (
+                    {!stripeProductID && (
                       <p className={classes.warning}>
                         {'This product is not yet connected to Product ID. To link this product, '}
                         <Link
@@ -140,7 +140,7 @@ export default async function Order({ params: { id } }) {
                         </Link>
                         {'.'}
                       </p>
-                    )} */}
+                    )}
                     <h6 className={classes.title}>
                       <Link href={`/products/${product.slug}`} className={classes.titleLink}>
                         {title}

@@ -1,27 +1,57 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+
 import { Product } from '../../../payload/payload-types'
+
 import classes from './index.module.scss'
 
-export const calculatePriceWithDiscount = (
-  price: number,
-  discount: number,
+export const priceFromJSON = (
+  priceJSON: string,
   quantity: number = 1,
+  raw?: boolean,
 ): { originalPrice: string; modifiedPrice: string } => {
-  const totalPrice = price * quantity
-  const discountAmount = totalPrice * (discount / 100)
-  const discountedPrice = totalPrice - discountAmount
+  let originalPrice = ''
+  let modifiedPrice = ''
 
-  const originalPrice = totalPrice.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'INR',
-  })
+  if (priceJSON) {
+    try {
+      const parsed = JSON.parse(priceJSON)?.data[0]
+      const priceValue = parsed.unit_amount * quantity
+      const priceType = parsed.type
 
-  const modifiedPrice = discountedPrice.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'INR',
-  })
+      if (raw)
+        return {
+          originalPrice: priceValue.toString(),
+          modifiedPrice: (priceValue + 100 * quantity).toString(),
+        }
+
+      originalPrice = (priceValue / 100).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'INR', // TODO: use `parsed.currency`
+      })
+
+      modifiedPrice = ((priceValue + 10000 * quantity) / 100).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'INR', // TODO: use `parsed.currency`
+      })
+
+      if (priceType === 'recurring') {
+        originalPrice += `/${
+          parsed.recurring.interval_count > 1
+            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
+            : parsed.recurring.interval
+        }`
+        modifiedPrice += `/${
+          parsed.recurring.interval_count > 1
+            ? `${parsed.recurring.interval_count} ${parsed.recurring.interval}`
+            : parsed.recurring.interval
+        }`
+      }
+    } catch (e) {
+      console.error(`Cannot parse priceJSON`) // eslint-disable-line no-console
+    }
+  }
 
   return { originalPrice, modifiedPrice }
 }
@@ -29,25 +59,26 @@ export const calculatePriceWithDiscount = (
 export const Price: React.FC<{
   product: Product
   quantity?: number
+  size?: string
   button?: 'addToCart' | 'removeFromCart' | false
 }> = props => {
-  const { product: { price, discount } = {}, button = 'addToCart', quantity = 1 } = props
+  const { product, product: { priceJSON } = {}, button = 'addToCart', quantity, size } = props
 
-  const [priceDisplay, setPriceDisplay] = useState<{
+  const [price, setPrice] = useState<{
     originalPrice: string
     modifiedPrice: string
-  }>(() => calculatePriceWithDiscount(price, discount, quantity))
+  }>(() => priceFromJSON(priceJSON, quantity))
 
   useEffect(() => {
-    setPriceDisplay(calculatePriceWithDiscount(price, discount, quantity))
-  }, [price, discount, quantity])
+    setPrice(priceFromJSON(priceJSON, quantity))
+  }, [priceJSON, quantity])
 
   return (
     <div className={classes.actions}>
-      {priceDisplay?.originalPrice && priceDisplay?.modifiedPrice && (
+      {typeof price?.originalPrice !== 'undefined' && price?.modifiedPrice !== '' && (
         <div className={classes.price}>
-          <p className={classes.originalPrice}>{priceDisplay.originalPrice}</p>
-          <p>{priceDisplay.modifiedPrice}</p>
+          <p className={classes.modifiedPrice}>{price?.modifiedPrice}</p>
+          <p>{price?.originalPrice}</p>
         </div>
       )}
     </div>

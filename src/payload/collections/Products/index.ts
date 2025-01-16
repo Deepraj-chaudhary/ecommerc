@@ -102,19 +102,6 @@ const Products: CollectionConfig = {
               },
             },
             {
-              name: 'price',
-              label: 'Price',
-              type: 'number',
-              required: true,
-
-            },
-            {
-              name: 'discount',
-              label: 'Discount Percentage',
-              type: 'number',
-              defaultValue: 0,
-            },
-            {
               name: 'enablePaywall',
               label: 'Enable Paywall',
               type: 'checkbox',

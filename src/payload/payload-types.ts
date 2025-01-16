@@ -406,8 +406,6 @@ export interface Product {
     | null;
   categories?: (string | Category)[] | null;
   relatedProducts?: (string | Product)[] | null;
-  price: number;
-  discount?: number | null;
   moreSizes?: ('S' | 'M' | 'L' | 'XL')[] | null;
   media?: string | Media | null;
   slug?: string | null;
